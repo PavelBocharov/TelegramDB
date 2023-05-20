@@ -1,0 +1,7 @@
+# Project exclude paths
+/target/
+/log/
+/logs/
+/.idea/
+/.mvn/
+/tbot.db
