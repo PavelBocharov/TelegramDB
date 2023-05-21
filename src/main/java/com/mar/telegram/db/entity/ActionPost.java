@@ -17,7 +17,7 @@ public class ActionPost {
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "action_post_seq")
     private Long id;
 
-    @OneToOne(optional = false)
+    @OneToOne
     private PostInfo post;
 
     @Column(name = "action", nullable = false)

@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - pgsql
+    tty: true
+    restart: always
+    networks:
+      - bridge
+      - pgnet
+  pgsql:
+    image: postgres:14
+    restart: always
+    environment:
+      - POSTGRES_USER=tdb
+      - POSTGRES_PASSWORD=tdb
+      - POSTGRES_DB=tdb
+    networks:
+      - pgnet
+    volumes:
+      - D:/temp:/var/lib/postgresql/data
+volumes:
+  cache:
+    driver: local
+networks:
+  bridge:
+    driver: bridge
+  pgnet:
+    external: false
