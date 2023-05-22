@@ -6,12 +6,22 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on:
+      - tbotconf
       - pgsql
     tty: true
     restart: always
     networks:
       - bridge
       - pgnet
+  tbotconf:
+    image: marolok/telegram_conf:1.0.0
+    environment:
+      GIT_URL: 'GIT_SSH_URL'
+      PRIVATE_KEY: 'PRIVATE_KEY_SSH'
+    tty: true
+    restart: always
+    networks:
+      - bridge
   pgsql:
     image: postgres:14
     restart: always

@@ -1,0 +1,9 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: telegram-db
+  profiles:
+    active: image
+  config:
+    import: 'configserver:http://tbotconf:8888'
