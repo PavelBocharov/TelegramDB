@@ -2,12 +2,13 @@ package com.mar.telegram.db.entity;
 
 import com.mar.telegram.db.dto.ContentType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.util.Date;
 
 @Data
+@With
 @Entity
 @Builder
 @NoArgsConstructor
@@ -36,5 +37,12 @@ public class PostInfo {
 
     @Column(name = "media_type")
     private ContentType type;
+
+    @Column(name = "update_date")
+    private Date updateDate;
+
+    @Column(name = "create_date", updatable = false, columnDefinition =  "DATE DEFAULT NOW()")
+    @CreationTimestamp
+    private Date createDate;
 
 }

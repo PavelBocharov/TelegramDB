@@ -6,9 +6,10 @@ import com.mar.telegram.db.mapper.PostMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
+
+import java.util.Date;
 
 @Slf4j
 @RestController()
@@ -35,6 +36,7 @@ public class PostController {
     @PostMapping(value = "")
     public Mono<PostInfoDto> create(@RequestBody PostInfoDto postInfoDto) {
         return Mono.justOrEmpty(postMapper.mapToEntity(postInfoDto))
+                .map(postInfo -> postInfo.withUpdateDate(new Date()))
                 .map(postInfoRepository::save)
                 .map(postMapper::mapToDto);
     }
